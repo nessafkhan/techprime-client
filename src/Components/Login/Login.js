@@ -24,7 +24,7 @@ const Login = () => {
 		setPassword('');
 	};
 	return (
-		<div className={LoginStyles.container}>
+		
 			<div className={LoginStyles.form_container}>
 				<form onSubmit={submitHandler}>
 					<div>
@@ -74,7 +74,6 @@ const Login = () => {
 					</button>
 				</form>
 			</div>
-		</div>
 	);
 };
 

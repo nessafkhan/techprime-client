@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AddProject from './Pages/AddProject';
+import AddProjectPage from './Pages/AddProjectPage';
 import Dashboard from './Pages/Dashboard';
-import ListProjects from './Pages/ListProjects';
+import ListProjectPage from './Pages/ListProjectPage';
 import LoginPage from './Pages/LoginPage';
 import { useSelector } from 'react-redux';
 const AppRoutes = () => {
@@ -13,8 +13,8 @@ const AppRoutes = () => {
 			{user && (
 				<>
 					<Route path="/dashboard" element={<Dashboard />} />
-					<Route path="/add-project" element={<AddProject />} />
-					<Route path="/project" element={<ListProjects />} />
+					<Route path="/add-project" element={<AddProjectPage />} />
+					<Route path="/project" element={<ListProjectPage />} />
 					<Route path="*" element={<h1>404 Not found</h1>} />
 				</>
 			)}

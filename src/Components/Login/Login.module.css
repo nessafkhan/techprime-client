@@ -1,15 +1,7 @@
-.container{
-    height: 50%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    background-color: rgb(58, 58, 185);
-    border-bottom-left-radius: 100px 80px;
-}
 .form_container{
     width: 30%;
     height: 100%;
-    margin:10% auto;
+    margin:190px auto;
     padding: 10px;
     position: relative;
     background-color: #ffff;
