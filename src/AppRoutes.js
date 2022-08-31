@@ -7,16 +7,9 @@ import LoginPage from './Pages/LoginPage';
 import { useSelector } from 'react-redux';
 
 const AppRoutes = () => {
-	const user = useSelector((state) => state.user.authenticated);
-	const navigate = useNavigate();
+	
 
-	useEffect(() => {
-		if (!user) {
-			navigate('/');
-		} else {
-			navigate('/dashboard');
-		}
-	}, [user, navigate]);
+	
 
 	return (
 		<Routes>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../Redux/apiCalls';
 import LoginStyles from './Login.module.css';
 
@@ -8,14 +9,9 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const dispatch = useDispatch();
 	const { isFetching, error } = useSelector((state) => state.user);
+	const user = useSelector((state) => state.user.authenticated);
+	const navigate = useNavigate();
 
-	const emailChangeHandler = (event) => {
-		setEmail(event.target.value);
-	};
-
-	const passwordChangeHandler = (event) => {
-		setPassword(event.target.value);
-	};
 
 	const submitHandler = (event) => {
 		event.preventDefault();
@@ -23,6 +19,15 @@ const Login = () => {
 		setEmail('');
 		setPassword('');
 	};
+
+	useEffect(() => {
+		if (!user) {
+			navigate('/');
+		} else {
+			navigate('/dashboard');
+		}
+	}, [user, navigate]);
+
 	return (
 		
 			<div className={LoginStyles.form_container}>
@@ -39,7 +44,7 @@ const Login = () => {
 							type="email"
 							className={LoginStyles.login_input}
 							value={email}
-							onChange={emailChangeHandler}
+							onChange={(e)=> setEmail(e.target.value)}
 							name="email"
 						/>
 					</div>
@@ -56,7 +61,7 @@ const Login = () => {
 							type="password"
 							className={LoginStyles.login_input}
 							value={password}
-							onChange={passwordChangeHandler}
+							onChange={(e)=>setPassword(e.target.value)}
 							name="password"
 						/>
 						{error && (
