@@ -8,7 +8,7 @@ const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const dispatch = useDispatch();
-	const { isFetching, error, authenticated } = useSelector((state) => state.user);
+	const { isFetching, error } = useSelector((state) => state.user);
 	const navigate = useNavigate();
 
 	const submitHandler = (event) => {
@@ -18,11 +18,13 @@ const Login = () => {
 		setPassword('');
 	};
 
-	useEffect(()=>{
-		if(authenticated){
-			navigate('/dashboard')
+	const token = localStorage.getItem('token');
+
+	useEffect(() => {
+		if (token) {
+			navigate('/dashboard');
 		}
-	},[authenticated,navigate])
+	}, [token, navigate]);
 	return (
 		<div className={LoginStyles.form_container}>
 			<form onSubmit={submitHandler}>

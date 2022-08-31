@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import AddProjectStyles from './AddProject.module.css';
+import { addProject } from '../../Redux/apiCalls';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddProject = () => {
+	const dispatch = useDispatch();
+	const { loading, error } = useSelector((state) => state.project);
 	const [inputName, setInputName] = useState('');
 	const [reason, setReason] = useState('');
 	const [type, setType] = useState('');
@@ -15,6 +19,20 @@ const AddProject = () => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
+		const project = {
+			name: inputName,
+			reason,
+			type,
+			division,
+			category,
+			priority,
+			department,
+			start: startDate,
+			end: endDate,
+			location,
+		};
+		addProject(dispatch, project);
+		setInputName('');
 	};
 
 	return (
@@ -171,17 +189,22 @@ const AddProject = () => {
 					<label htmlFor="status">Status</label>
 					<br />
 					<input
-                        className={AddProjectStyles.date_input}
+						className={AddProjectStyles.date_input}
 						type="text"
 						id="status"
 						value="Registered"
 						disabled
 					/>
 				</div>
-
+				{error && (
+					<p className={AddProjectStyles.error_msg}>
+						{error.response.data.message }
+					</p>
+				)}
 				<button
 					type="submit"
 					className={AddProjectStyles.submit_button}
+					disabled={loading}
 				>
 					Save Project
 				</button>

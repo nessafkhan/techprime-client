@@ -47,3 +47,13 @@
     cursor: pointer;
     font-weight: 600;
 }
+button:disabled{
+    cursor: not-allowed;
+    background-color: rgb(81, 131, 131);
+}
+.error_msg{
+    color:red;
+    font-size:15px;
+    font-weight: 300;
+    text-align: center;
+}
