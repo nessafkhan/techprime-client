@@ -12,6 +12,7 @@
   justify-content: space-around;
   list-style: none;
   font-size: 70px;
+  cursor: pointer;
 }
 .list>hr{
   margin-top: 10px;

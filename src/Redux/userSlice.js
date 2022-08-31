@@ -15,6 +15,7 @@ const userSlice = createSlice({
 		loginSuccess: (state, action) => {
 			state.isFetching = false;
 			state.currentUser = action.payload;
+			localStorage.setItem('token', action.payload.jwt_token);
 			state.authenticated = true;
 			state.error = false;
 		},
@@ -22,8 +23,17 @@ const userSlice = createSlice({
 			state.isFetching = false;
 			state.error = true;
 		},
+		logout: (state) => {
+			localStorage.removeItem('token');
+			state.authenticated = false;
+			state.currentUser = null;
+			state.isFetching = false;
+			state.error = null;
+			console.log('logout');
+		},
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailed } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailed, logout } =
+	userSlice.actions;
 export default userSlice.reducer;
