@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import AddProjectPage from './Pages/AddProjectPage';
 import Dashboard from './Pages/Dashboard';
 import ListProjectPage from './Pages/ListProjectPage';
 import LoginPage from './Pages/LoginPage';
-import { useSelector } from 'react-redux';
 
 const AppRoutes = () => {
 	
