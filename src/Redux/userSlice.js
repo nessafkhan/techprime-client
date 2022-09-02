@@ -15,7 +15,7 @@ const userSlice = createSlice({
 		loginSuccess: (state, action) => {
 			state.isFetching = false;
 			state.currentUser = action.payload;
-			localStorage.setItem('token', action.payload.jwt_token);
+			localStorage.setItem('token', `Bearer ${action.payload.jwt_token}`);
 			state.authenticated = true;
 			state.error = false;
 		},

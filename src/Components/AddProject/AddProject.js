@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 const AddProject = () => {
 	const dispatch = useDispatch();
 	const { loading, error } = useSelector((state) => state.project);
-	const [inputName, setInputName] = useState('');
-	const [reason, setReason] = useState('');
-	const [type, setType] = useState('');
-	const [division, setDivision] = useState('');
-	const [category, setCategory] = useState('');
-	const [priority, setPriority] = useState('');
-	const [department, setDepartment] = useState('');
-	const [startDate, setStartDate] = useState('');
-	const [endDate, setEndDate] = useState('');
-	const [location, setLocation] = useState('');
+	const [inputName, setInputName] = useState();
+	const [reason, setReason] = useState();
+	const [type, setType] = useState();
+	const [division, setDivision] = useState();
+	const [category, setCategory] = useState();
+	const [priority, setPriority] = useState();
+	const [department, setDepartment] = useState();
+	const [startDate, setStartDate] = useState();
+	const [endDate, setEndDate] = useState();
+	const [location, setLocation] = useState();
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -55,7 +55,7 @@ const AddProject = () => {
 							value={reason}
 							onChange={(e) => setReason(e.target.value)}
 						>
-							<option value="Business">For Business</option>
+							<option>For Business</option>
 							<option value="Transport">For Transport</option>
 							<option value="Dealership">For Dealership</option>
 						</select>
@@ -70,7 +70,7 @@ const AddProject = () => {
 							value={type}
 							onChange={(e) => setType(e.target.value)}
 						>
-							<option value="Internal">Internal</option>
+							<option>Internal</option>
 							<option value="External">External</option>
 							<option value="Vendor">Vendor</option>
 						</select>
@@ -85,7 +85,7 @@ const AddProject = () => {
 							value={division}
 							onChange={(e) => setDivision(e.target.value)}
 						>
-							<option value="Compressor">Compressor</option>
+							<option>Compressor</option>
 							<option value="Filters">Filters</option>
 							<option value="Glass">Glass</option>
 							<option value="Pumps">Pumps</option>
@@ -104,7 +104,7 @@ const AddProject = () => {
 							value={category}
 							onChange={(e) => setCategory(e.target.value)}
 						>
-							<option value="Quality A">Quality A</option>
+							<option>Quality A</option>
 							<option value="Quality B">Quality B</option>
 							<option value="Quality C">Quality C</option>
 						</select>
@@ -119,7 +119,7 @@ const AddProject = () => {
 							value={priority}
 							onChange={(e) => setPriority(e.target.value)}
 						>
-							<option value="High">High</option>
+							<option>High</option>
 							<option value="Medium">Medium</option>
 							<option value="Low">Low</option>
 						</select>
@@ -134,7 +134,7 @@ const AddProject = () => {
 							value={department}
 							onChange={(e) => setDepartment(e.target.value)}
 						>
-							<option value="Strategy">Strategy</option>
+							<option>Strategy</option>
 							<option value="Finance">Finance</option>
 							<option value="Quality">Quality</option>
 							<option value="Maintenence">Maintenence</option>
@@ -198,7 +198,7 @@ const AddProject = () => {
 				</div>
 				{error && (
 					<p className={AddProjectStyles.error_msg}>
-						{error.response.data.message }
+						{error.response.data.message}
 					</p>
 				)}
 				<button

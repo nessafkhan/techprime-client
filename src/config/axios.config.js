@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://techprime-backend.herokuapp.com/api/';
+//techprime-backend.herokuapp.com
+const BASE_URL = 'http://localhost:8000/api/';
 const getToken = () => {
 	try {
 		return localStorage.getItem('token');
@@ -8,8 +9,7 @@ const getToken = () => {
 		console.log(error);
 	}
 };
-
 export const API_USER_REQUEST = axios.create({
 	baseURL: BASE_URL,
-	headers: { authorization: `Bearer ${getToken()}` },
+	headers: { authorization: `${getToken()}` },
 });
