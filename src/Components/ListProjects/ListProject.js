@@ -1,7 +1,14 @@
-import React from 'react';
+import { useEffect } from 'react';
 import ListProjectStyles from './ListProject.module.css';
+import { getProjects } from '../../Redux/apiCalls';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ListProject = () => {
+	const dispatch = useDispatch();
+	const projects = useSelector(state => state.project.projects);
+	useEffect(() => {
+		getProjects(dispatch)
+	}, [dispatch]);
 	return (
 		<div className={ListProjectStyles.container}>
 			<div className={ListProjectStyles.filter_wrapper}>
@@ -9,6 +16,7 @@ const ListProject = () => {
 					<form>
 						<input
 							type="text"
+							placeholder='Search'
 							className={ListProjectStyles.search_input}
 						/>
 					</form>
@@ -20,13 +28,45 @@ const ListProject = () => {
 						id="sort"
 						className={ListProjectStyles.sort_selector}
 					>
-						<option value=""> --Choose-- </option>
+						<option> --Choose-- </option>
 						<option value="priority">Priority</option>
 						<option value="status">Status</option>
 						<option value="division">Division</option>
 					</select>
 				</div>
 			</div>
+
+			<table className={ListProjectStyles.projects_table}>
+				<thead>
+					<tr>
+						<th>Project Name</th>
+						<th>Reason</th>
+						<th>Type</th>
+						<th>Division</th>
+						<th>Category</th>
+						<th>Priority</th>
+						<th>Department</th>
+						<th>Location</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					{projects.map((item)=> <tr key={item._id}>
+						<td>{item.name}</td>
+						<td>{item.reason}</td>
+						<td>{item.type}</td>
+						<td>{item.division}</td>
+						<td>{item.category}</td>
+						<td>{item.priority}</td>
+						<td>{item.department}</td>
+						<td>{item.location}</td>
+						<td>{item.status}</td>
+						<button className={ListProjectStyles.table_btn_start}>Start</button>
+						<button className={ListProjectStyles.table_btn}>Close</button>
+						<button className={ListProjectStyles.table_btn}>Cancel</button>
+					</tr>)}
+				</tbody>
+			</table>
 		</div>
 	);
 };

@@ -9,7 +9,11 @@ const getToken = () => {
 		console.log(error);
 	}
 };
+
 export const API_USER_REQUEST = axios.create({
 	baseURL: BASE_URL,
 	headers: { authorization: `${getToken()}` },
+});
+export const API_LOGIN_REQUEST = axios.create({
+	baseURL: BASE_URL,
 });
