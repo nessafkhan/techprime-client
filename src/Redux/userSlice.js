@@ -17,9 +17,9 @@ const userSlice = createSlice({
 			state.authenticated = true;
 			state.error = false;
 		},
-		loginFailed: (state) => {
+		loginFailed: (state, action) => {
 			state.isFetching = false;
-			state.error = true;
+			state.error = action.payload;
 		},
 		logout: (state) => {
 			sessionStorage.removeItem('token');

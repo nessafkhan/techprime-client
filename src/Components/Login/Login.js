@@ -59,7 +59,7 @@ const Login = () => {
 					/>
 					{error && (
 						<p className={LoginStyles.error_msg}>
-							Invalid credentials
+							{error.response.data.message}
 						</p>
 					)}
 				</div>
