@@ -12,8 +12,7 @@ const projectSlice = createSlice({
 			state.loading = true;
 		},
 		projectAdded: (state, action) => {
-            console.log(action.payload);
-			state.projects = [...state.projects,action.payload];
+			state.projects = [...state.projects, action.payload];
 			state.error = false;
 			state.loading = false;
 		},
@@ -33,6 +32,22 @@ const projectSlice = createSlice({
 			state.loading = false;
 			state.error = true;
 		},
+		projectUpdating: (state) => {
+			state.loading = true;
+		},
+		projectUpdated: (state, action) => {
+			state.projects[
+				state.projects.findIndex(
+					(project) => project._id === action.payload._id
+				)
+			] = action.payload;
+
+			state.error = false;
+			state.loading = false;
+		},
+		projectUpdateFailed: (state) => {
+			state.error = true;
+		},
 	},
 });
 
@@ -43,5 +58,8 @@ export const {
 	projectsFetching,
 	projectsFetched,
 	projectsFetchingFailed,
+	projectUpdating,
+	projectUpdated,
+	projectUpdateFailed,
 } = projectSlice.actions;
 export default projectSlice.reducer;

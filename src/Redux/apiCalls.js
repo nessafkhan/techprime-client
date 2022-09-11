@@ -1,34 +1,63 @@
-import { API_USER_REQUEST,API_LOGIN_REQUEST } from '../config/axios.config';
+import { BASE_URL } from '../config/axios.config';
 import { loginStart, loginSuccess, loginFailed } from './userSlice';
-import { projectAdding, projectAdded, projectAddFailed, projectsFetching, projectsFetched, projectsFetchingFailed } from './projectSlice';
+import {
+	projectAdding,
+	projectAdded,
+	projectAddFailed,
+	projectsFetching,
+	projectsFetched,
+	projectsFetchingFailed,
+	projectUpdating,
+	projectUpdated,
+	projectUpdateFailed,
+} from './projectSlice';
+import axios from 'axios';
 
-
-export const login = async(dispatch, user) => {
-    dispatch(loginStart());
-    try{
-        const res = await API_LOGIN_REQUEST.post('user/login', user);
-        dispatch(loginSuccess(res.data));
-    }catch(error){
-        dispatch(loginFailed(error));
-    }
-}
+export const login = async (dispatch, user) => {
+	dispatch(loginStart());
+	try {
+		const res = await axios.post(`${BASE_URL}user/login`, user);
+		dispatch(loginSuccess(res.data));
+	} catch (error) {
+		dispatch(loginFailed(error));
+	}
+};
 
 export const addProject = async (dispatch, project) => {
-    dispatch(projectAdding());
-    try{
-        const res = await API_USER_REQUEST.post('project/', project);
-        dispatch(projectAdded(res.data));
-    }catch(error){
-        dispatch(projectAddFailed(error));
-    }
-}
+	dispatch(projectAdding());
+	try {
+		const res = await axios.post(`${BASE_URL}project/`, project, {
+			headers: { Authorization: sessionStorage.getItem('token') },
+		});
+		dispatch(projectAdded(res.data));
+	} catch (error) {
+		dispatch(projectAddFailed(error));
+	}
+};
 
 export const getProjects = async (dispatch) => {
-    dispatch(projectsFetching());
-    try{
-        const res = await API_USER_REQUEST.get('project/');
-        dispatch(projectsFetched(res.data));
-    }catch(error){
-        dispatch(projectsFetchingFailed(error));
-    }
-}
+	dispatch(projectsFetching());
+	try {
+		const res = await axios.get(`${BASE_URL}project/`, {
+			headers: { Authorization: sessionStorage.getItem('token') },
+		});
+		dispatch(projectsFetched(res.data));
+	} catch (error) {
+		dispatch(projectsFetchingFailed(error));
+	}
+};
+
+export const updateProject = async (dispatch, payload) => {
+	dispatch(projectUpdating());
+	try {
+		const { id, status } = payload;
+		const res = await axios.put(
+			`${BASE_URL}project/${id}`,
+			{ status },
+			{ headers: { Authorization: sessionStorage.getItem('token') } }
+		);
+		dispatch(projectUpdated(res.data));
+	} catch (error) {
+		dispatch(projectUpdateFailed);
+	}
+};

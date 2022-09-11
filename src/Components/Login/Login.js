@@ -18,7 +18,7 @@ const Login = () => {
 		setPassword('');
 	};
 
-	const token = localStorage.getItem('token');
+	const token = sessionStorage.getItem('token');
 
 	useEffect(() => {
 		if (token) {
