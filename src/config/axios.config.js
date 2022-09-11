@@ -1,7 +1,7 @@
 //import axios from 'axios';
 
 //techprime-backend.herokuapp.com
-export const BASE_URL = 'http://localhost:8000/api/';
+export const BASE_URL = 'https://techprime.netlify.app/api/';
 // const getToken = () => {
 // 	try {
 // 		return sessionStorage.getItem('token');
