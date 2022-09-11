@@ -2,7 +2,7 @@
 
 //https://techprime.netlify.app
 //http://localhost:3000
-export const BASE_URL = 'https://techprime.netlify.app/api';
+export const BASE_URL = 'https://techprime.netlify.app/api/';
 // const getToken = () => {
 // 	try {
 // 		return sessionStorage.getItem('token');
