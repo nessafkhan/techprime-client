@@ -1,15 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ListProjectStyles from './ListProject.module.css';
 import { getProjects, updateProject } from '../../Redux/apiCalls';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ListProject = () => {
+	const [searchInput, setSearchInput] = useState();
+	const [filter, setFilter] = useState('name');
 	const dispatch = useDispatch();
 	const projects = useSelector((state) => state.project.projects);
 	useEffect(() => {
 		getProjects(dispatch);
 	}, [dispatch]);
-
+	const searchInputHandler = (e) => {
+		e.preventDefault();
+		getProjects(dispatch, searchInput);
+	};
+	const filterHandler = (e) => {
+		setFilter(e.target.value);
+		getProjects(dispatch, null, filter);
+		console.log(filter);
+	};
 	const projectUpdateHandler = (id, ACTION) => {
 		let payload = {};
 		switch (ACTION) {
@@ -33,11 +43,13 @@ const ListProject = () => {
 		<div className={ListProjectStyles.container}>
 			<div className={ListProjectStyles.filter_wrapper}>
 				<div className={ListProjectStyles.serchinput_container}>
-					<form>
+					<form onSubmit={searchInputHandler}>
 						<input
 							type="text"
 							placeholder="Search"
 							className={ListProjectStyles.search_input}
+							value={searchInput}
+							onChange={(e) => setSearchInput(e.target.value)}
 						/>
 					</form>
 				</div>
@@ -47,11 +59,13 @@ const ListProject = () => {
 						name="sort"
 						id="sort"
 						className={ListProjectStyles.sort_selector}
+						value={filter}
+						onChange={filterHandler}
 					>
-						<option> --Choose-- </option>
+						<option value="name">Name</option>
 						<option value="priority">Priority</option>
 						<option value="status">Status</option>
-						<option value="division">Division</option>
+						<option value="location">Location</option>
 					</select>
 				</div>
 			</div>

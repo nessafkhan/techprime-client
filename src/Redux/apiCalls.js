@@ -35,10 +35,16 @@ export const addProject = async (dispatch, project) => {
 	}
 };
 
-export const getProjects = async (dispatch) => {
+export const getProjects = async (dispatch, qSearch, qFilter) => {
 	dispatch(projectsFetching());
 	try {
-		const res = await axios.get(`${BASE_URL}project/`, {
+		let query_URL = `${BASE_URL}project`;
+		if (qFilter) {
+			query_URL = `${BASE_URL}project?qFilter=${qFilter}`;
+		} else if (qSearch) {
+			query_URL = `${BASE_URL}project?qName=${qSearch}`;
+		}
+		const res = await axios.get(query_URL, {
 			headers: { Authorization: sessionStorage.getItem('token') },
 		});
 		dispatch(projectsFetched(res.data));

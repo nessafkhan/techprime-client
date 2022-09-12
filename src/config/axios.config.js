@@ -2,7 +2,7 @@
 
 //https://techprime-backend.herokuapp.com
 //http://localhost:8000
-export const BASE_URL = 'https://techprime-backend.herokuapp.com/api/';
+export const BASE_URL = 'http://localhost:8000/api/';
 // const getToken = () => {
 // 	try {
 // 		return sessionStorage.getItem('token');

@@ -1,0 +1,6 @@
+.chart_container{
+    width: 500px;
+    margin: 250px 150px;
+    top: 0;
+    position: fixed;
+}

@@ -13,8 +13,8 @@
     font-size: 20px;
 }
 .cards_wrapper{
-    width: 80%;
-    margin:120px auto;
+    width: 90%;
+    margin:0 auto;
     position: relative;
     display: flex;
     justify-content: space-around;
