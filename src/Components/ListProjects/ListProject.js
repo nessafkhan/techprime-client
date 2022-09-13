@@ -7,7 +7,7 @@ const ListProject = () => {
 	const [searchInput, setSearchInput] = useState();
 	const [filter, setFilter] = useState('name');
 	const dispatch = useDispatch();
-	const projects = useSelector((state) => state.project.projects);
+	const { projects, loading } = useSelector((state) => state.project);
 	useEffect(() => {
 		getProjects(dispatch);
 	}, [dispatch]);
@@ -69,7 +69,7 @@ const ListProject = () => {
 					</select>
 				</div>
 			</div>
-
+			{loading && <h4 style={{textAlign:'center'}}>Loading...</h4>}
 			<table className={ListProjectStyles.projects_table}>
 				<thead>
 					<tr>
@@ -84,56 +84,48 @@ const ListProject = () => {
 						<th>Status</th>
 					</tr>
 				</thead>
-				{projects.length > 0 ? (
-					<tbody>
-						{projects.map((item) => (
-							<tr key={item._id}>
-								<td>{item.name}</td>
-								<td>{item.reason}</td>
-								<td>{item.type}</td>
-								<td>{item.division}</td>
-								<td>{item.category}</td>
-								<td>{item.priority}</td>
-								<td>{item.department}</td>
-								<td>{item.location}</td>
-								<td>{item.status}</td>
-								<button
-									className={
-										ListProjectStyles.table_btn_start
-									}
-									onClick={() => {
-										projectUpdateHandler(item._id, 'START');
-									}}
-								>
-									Start
-								</button>
-								<button
-									className={ListProjectStyles.table_btn}
-									onClick={() => {
-										projectUpdateHandler(item._id, 'CLOSE');
-									}}
-								>
-									Close
-								</button>
-								<button
-									className={ListProjectStyles.table_btn}
-									onClick={() => {
-										projectUpdateHandler(
-											item._id,
-											'CANCEL'
-										);
-									}}
-								>
-									Cancel
-								</button>
-							</tr>
-						))}
-					</tbody>
-				) : (
-					<h3 className={ListProjectStyles.not_found}>
+				{projects.length < 1 && <h3 className={ListProjectStyles.not_found}>
 						No projects found!
-					</h3>
-				)}
+					</h3>}
+				<tbody>
+					{projects.map((item) => (
+						<tr key={item._id}>
+							<td>{item.name}</td>
+							<td>{item.reason}</td>
+							<td>{item.type}</td>
+							<td>{item.division}</td>
+							<td>{item.category}</td>
+							<td>{item.priority}</td>
+							<td>{item.department}</td>
+							<td>{item.location}</td>
+							<td>{item.status}</td>
+							<button
+								className={ListProjectStyles.table_btn_start}
+								onClick={() => {
+									projectUpdateHandler(item._id, 'START');
+								}}
+							>
+								Start
+							</button>
+							<button
+								className={ListProjectStyles.table_btn}
+								onClick={() => {
+									projectUpdateHandler(item._id, 'CLOSE');
+								}}
+							>
+								Close
+							</button>
+							<button
+								className={ListProjectStyles.table_btn}
+								onClick={() => {
+									projectUpdateHandler(item._id, 'CANCEL');
+								}}
+							>
+								Cancel
+							</button>
+						</tr>
+					))}
+				</tbody>
 			</table>
 		</div>
 	);
